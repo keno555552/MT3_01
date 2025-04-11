@@ -2,110 +2,90 @@
 #include "Novice.h"
 
 #pragma region Vector2
-Vector2 Vector2::operator+(const Vector2& target)
-{
+Vector2 Vector2::operator+(const Vector2& target) {
 	return { x + target.x, y + target.y };
 }
 
-Vector2 Vector2::operator-(const Vector2& target)
-{
+Vector2 Vector2::operator-(const Vector2& target) {
 	return { x - target.x, y - target.y };
 }
 
-Vector2 Vector2::operator*(const Vector2& target)
-{
+Vector2 Vector2::operator*(const Vector2& target) {
 	return { x * target.x, y * target.y };
 }
 
-Vector2 Vector2::operator/(const Vector2& target)
-{
+Vector2 Vector2::operator/(const Vector2& target) {
 	return { x / target.x, y / target.y };
 }
 
-Vector2 Vector2::operator*(const float& target)
-{
+Vector2 Vector2::operator*(const float& target) {
 	return { x * target, y * target };
 }
 
-Vector2 operator*(float scalar, const Vector2& vec)
-{
+Vector2 operator*(float scalar, const Vector2& vec) {
 	return { vec.x * scalar, vec.y * scalar };
 }
 
-Vector2 Vector2::operator/(const float& target)
-{
+Vector2 Vector2::operator/(const float& target) {
 	return { x / target, y / target };
 }
 
 
 
-Vector2 Vector2::operator*(const int& target)
-{
+Vector2 Vector2::operator*(const int& target) {
 	return { x * (float)target, y * (float)target };
 }
 
-Vector2 operator*(int scalar, const Vector2& vec)
-{
+Vector2 operator*(int scalar, const Vector2& vec) {
 	return { vec.x * (float)scalar, vec.y * (float)scalar };
 }
 #pragma endregion
 
 #pragma region Vector3
-Vector3 Vector3::operator+(const Vector3& target)
-{
+Vector3 Vector3::operator+(const Vector3& target) {
 	return { x + target.x, y + target.y , z + target.z };
 }
 
-Vector3 Vector3::operator-(const Vector3& target)
-{
+Vector3 Vector3::operator-(const Vector3& target) {
 	return { x - target.x, y - target.y , z - target.z };
 }
 
-Vector3 Vector3::operator*(const Vector3& target)
-{
+Vector3 Vector3::operator*(const Vector3& target) {
 	return { x * target.x, y * target.y };
 }
 
-Vector3 Vector3::operator/(const Vector3& target)
-{
+Vector3 Vector3::operator/(const Vector3& target) {
 	return { x / target.x, y / target.y, z / target.z };
 }
 
-Vector3 Vector3::operator*(const float& target)
-{
+Vector3 Vector3::operator*(const float& target) {
 	return { x * target, y * target, z * target };
 }
 
-Vector3 operator*(float scalar, const Vector3& vec)
-{
+Vector3 operator*(float scalar, const Vector3& vec) {
 	return { vec.x * scalar, vec.y * scalar, vec.z * scalar };
 }
 
-Vector3 Vector3::operator/(const float& target)
-{
+Vector3 Vector3::operator/(const float& target) {
 	return { x / target, y / target, z / target };
 }
 
 
 
-Vector3 Vector3::operator*(const int& target)
-{
+Vector3 Vector3::operator*(const int& target) {
 	return { x * (float)target, y * (float)target, z * (float)target };
 }
 
 
-Vector3 operator*(int scalar, const Vector3& vec)
-{
+Vector3 operator*(int scalar, const Vector3& vec) {
 	return { vec.x * (float)scalar, vec.y * (float)scalar , vec.z * (float)scalar };
 }
 
-Vector3 Vector3::helmholtz()
-{
+Vector3 Vector3::helmholtz() {
 	return { sqrtf(x * x),sqrtf(y * y),sqrtf(z * z) };
 }
 
-Vector3 Vector3::normalize()
-{
+Vector3 Vector3::normalize() {
 	Vector3 length = helmholtz();
 	if (length.x != 0 && length.y != 0 && length.z != 0) {
 		return { x / length.x, y / length.y, z / length.z };
@@ -152,8 +132,7 @@ void VectorScreenPrintf(int x, int y, const Vector3& vector, const char* label) 
 #pragma endregion
 
 #pragma region Matrix3x3
-Matrix3x3 Matrix3x3::operator+(const Matrix3x3& target)
-{
+Matrix3x3 Matrix3x3::operator+(const Matrix3x3& target) {
 	Matrix3x3 resuit = {};
 
 	for (int i = 0; i < 3; i++) {
@@ -165,8 +144,7 @@ Matrix3x3 Matrix3x3::operator+(const Matrix3x3& target)
 	return resuit;
 }
 
-Matrix3x3 Matrix3x3::operator-(const Matrix3x3& target)
-{
+Matrix3x3 Matrix3x3::operator-(const Matrix3x3& target) {
 	Matrix3x3 resuit = {};
 
 	for (int i = 0; i < 3; i++) {
@@ -178,8 +156,7 @@ Matrix3x3 Matrix3x3::operator-(const Matrix3x3& target)
 	return resuit;
 }
 
-Matrix3x3 Matrix3x3::operator*(const Matrix3x3& target)
-{
+Matrix3x3 Matrix3x3::operator*(const Matrix3x3& target) {
 	Matrix3x3 result = {};
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -277,20 +254,17 @@ Matrix3x3 MakeAffineMatrix(Vector2 scale, float rotate, Vector2 translate) {
 			  translate.x,translate.y,1 };
 }
 
-Matrix3x3 MatrixMix(Matrix3x3 matrix1, Matrix3x3 matrix2)
-{
+Matrix3x3 MatrixMix(Matrix3x3 matrix1, Matrix3x3 matrix2) {
 	Matrix3x3 result = matrix1 * matrix2;
 	return result;
 }
 
-Matrix3x3 MatrixMix(Matrix3x3 matrix1, Matrix3x3 matrix2, Matrix3x3 matrix3)
-{
+Matrix3x3 MatrixMix(Matrix3x3 matrix1, Matrix3x3 matrix2, Matrix3x3 matrix3) {
 	Matrix3x3 result = matrix1 * matrix2 * matrix3;
 	return result;
 }
 
-Matrix3x3 MatrixMix(Matrix3x3 matrix1, Matrix3x3 matrix2, Matrix3x3 matrix3, Matrix3x3 matrix4)
-{
+Matrix3x3 MatrixMix(Matrix3x3 matrix1, Matrix3x3 matrix2, Matrix3x3 matrix3, Matrix3x3 matrix4) {
 	Matrix3x3 result = matrix1 * matrix2 * matrix3 * matrix4;
 	return result;
 }
@@ -301,23 +275,20 @@ Matrix3x3 MakeWorldMatrix(Matrix3x3 origin) {
 	return origin;
 }
 
-Matrix3x3 MakeViewMatrix(Matrix3x3 origin, Vector2 pos)
-{
+Matrix3x3 MakeViewMatrix(Matrix3x3 origin, Vector2 pos) {
 	Vector2 move = pos;
 	Matrix3x3 move2 = MakeTranslateMatrix3x3(move);
 	Matrix3x3 result = MatrixMix(origin, move2);
 	return Inverse(result);
 }
 
-Matrix3x3 MakeOrthographicMatrix(Vector2 leftTop, Vector2 rightBottom)
-{
+Matrix3x3 MakeOrthographicMatrix(Vector2 leftTop, Vector2 rightBottom) {
 	return{ 2.0f / (rightBottom.x - leftTop.x),0.0f,0.0f,
 			0.0f,2.0f / (leftTop.y - rightBottom.y),0.0f,
 			(leftTop.x + rightBottom.x) / (leftTop.x - rightBottom.x),(leftTop.y + rightBottom.y) / (rightBottom.y - leftTop.y),1.0f };
 }
 
-Matrix3x3 MakeViewportMatrix(Vector2 leftTop, Vector2 rightBottom)
-{
+Matrix3x3 MakeViewportMatrix(Vector2 leftTop, Vector2 rightBottom) {
 	return{ rightBottom.x / 2.0f,0.0f,0.0f,
 			0.0f,-(rightBottom.y / 2.0f),0.0f,
 			leftTop.x + (rightBottom.x / 2.0f),leftTop.y + (rightBottom.y / 2.0f),1.0f };
@@ -325,8 +296,7 @@ Matrix3x3 MakeViewportMatrix(Vector2 leftTop, Vector2 rightBottom)
 #pragma endregion
 
 #pragma region Matrix4x4
-Matrix4x4 Matrix4x4::Identity()
-{
+Matrix4x4 Matrix4x4::Identity() {
 	Matrix4x4 resuit = {};
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -343,36 +313,36 @@ Matrix4x4 Matrix4x4::Identity()
 
 Matrix4x4 Matrix4x4::Inverse() {
 	float determinant = m[0][0] * m[1][1] * m[2][2] * m[3][3]
-					  + m[0][0] * m[1][2] * m[2][3] * m[3][1]
-					  + m[0][0] * m[1][3] * m[2][1] * m[3][2]
-					  
-					  - m[0][0] * m[1][3] * m[2][2] * m[3][1]
-					  - m[0][0] * m[1][2] * m[2][1] * m[3][3]
-					  - m[0][0] * m[1][1] * m[2][3] * m[3][2]
-					  
-					  - m[0][1] * m[1][0] * m[2][2] * m[3][3]
-					  - m[0][2] * m[1][0] * m[2][3] * m[3][1]
-					  - m[0][3] * m[1][0] * m[2][1] * m[3][2]
-					  
-					  + m[0][3] * m[1][0] * m[2][2] * m[3][1]
-					  + m[0][2] * m[1][0] * m[2][1] * m[3][3]
-					  + m[0][1] * m[1][0] * m[2][3] * m[3][2]
-					  
-					  + m[0][1] * m[1][2] * m[2][0] * m[3][3]
-					  + m[0][2] * m[1][3] * m[2][0] * m[3][1]
-					  + m[0][3] * m[1][1] * m[2][0] * m[3][2]
-					  
-					  - m[0][3] * m[1][2] * m[2][0] * m[3][1]
-					  - m[0][2] * m[1][1] * m[2][0] * m[3][3]
-					  - m[0][1] * m[1][3] * m[2][0] * m[3][2]
-					  
-					  - m[0][1] * m[1][2] * m[2][3] * m[3][0]
-					  - m[0][2] * m[1][3] * m[2][1] * m[3][0]
-					  - m[0][3] * m[1][1] * m[2][2] * m[3][0]
-					  
-					  + m[0][3] * m[1][2] * m[2][1] * m[3][0]
-					  + m[0][2] * m[1][1] * m[2][3] * m[3][0]
-					  + m[0][1] * m[1][3] * m[2][2] * m[3][0];
+		+ m[0][0] * m[1][2] * m[2][3] * m[3][1]
+		+ m[0][0] * m[1][3] * m[2][1] * m[3][2]
+
+		- m[0][0] * m[1][3] * m[2][2] * m[3][1]
+		- m[0][0] * m[1][2] * m[2][1] * m[3][3]
+		- m[0][0] * m[1][1] * m[2][3] * m[3][2]
+
+		- m[0][1] * m[1][0] * m[2][2] * m[3][3]
+		- m[0][2] * m[1][0] * m[2][3] * m[3][1]
+		- m[0][3] * m[1][0] * m[2][1] * m[3][2]
+
+		+ m[0][3] * m[1][0] * m[2][2] * m[3][1]
+		+ m[0][2] * m[1][0] * m[2][1] * m[3][3]
+		+ m[0][1] * m[1][0] * m[2][3] * m[3][2]
+
+		+ m[0][1] * m[1][2] * m[2][0] * m[3][3]
+		+ m[0][2] * m[1][3] * m[2][0] * m[3][1]
+		+ m[0][3] * m[1][1] * m[2][0] * m[3][2]
+
+		- m[0][3] * m[1][2] * m[2][0] * m[3][1]
+		- m[0][2] * m[1][1] * m[2][0] * m[3][3]
+		- m[0][1] * m[1][3] * m[2][0] * m[3][2]
+
+		- m[0][1] * m[1][2] * m[2][3] * m[3][0]
+		- m[0][2] * m[1][3] * m[2][1] * m[3][0]
+		- m[0][3] * m[1][1] * m[2][2] * m[3][0]
+
+		+ m[0][3] * m[1][2] * m[2][1] * m[3][0]
+		+ m[0][2] * m[1][1] * m[2][3] * m[3][0]
+		+ m[0][1] * m[1][3] * m[2][2] * m[3][0];
 
 	return Matrix4x4{ (m[1][1] * m[2][2] * m[3][3]
 					 + m[1][2] * m[2][3] * m[3][1]
@@ -381,105 +351,105 @@ Matrix4x4 Matrix4x4::Inverse() {
 					 - m[1][2] * m[2][1] * m[3][3]
 					 - m[1][1] * m[2][3] * m[3][2]) / determinant,/// 11
 
-					(- m[0][1] * m[2][2] * m[3][3]
+					(-m[0][1] * m[2][2] * m[3][3]
 					 - m[0][2] * m[2][3] * m[3][1]
 					 - m[0][3] * m[2][1] * m[3][2]
 					 + m[0][3] * m[2][2] * m[3][1]
 					 + m[0][2] * m[2][1] * m[3][3]
 					 + m[0][1] * m[2][3] * m[3][2]) / determinant,/// 12
 
-					(+ m[0][1] * m[1][2] * m[3][3]
+					(+m[0][1] * m[1][2] * m[3][3]
 					 + m[0][2] * m[1][3] * m[3][1]
 					 + m[0][3] * m[1][1] * m[3][2]
 					 - m[0][3] * m[1][2] * m[3][1]
 					 - m[0][2] * m[1][1] * m[3][3]
 					 - m[0][1] * m[1][3] * m[3][2]) / determinant,/// 13
 
-					(- m[0][1] * m[1][2] * m[2][3]
+					(-m[0][1] * m[1][2] * m[2][3]
 					 - m[0][2] * m[1][3] * m[2][1]
 					 - m[0][3] * m[1][1] * m[2][2]
 					 + m[0][3] * m[1][2] * m[2][1]
 					 + m[0][2] * m[1][1] * m[2][3]
 					 + m[0][1] * m[1][3] * m[2][2]) / determinant,/// 14
 
-					(- m[1][0] * m[2][2] * m[3][3]
+					(-m[1][0] * m[2][2] * m[3][3]
 					 - m[1][2] * m[2][3] * m[3][0]
 					 - m[1][3] * m[2][0] * m[3][2]
 					 + m[1][3] * m[2][2] * m[3][0]
 					 + m[1][2] * m[2][0] * m[3][3]
 					 + m[1][0] * m[2][3] * m[3][2]) / determinant,/// 21
 
-					(+ m[0][0] * m[2][2] * m[3][3]
+					(+m[0][0] * m[2][2] * m[3][3]
 					 + m[0][2] * m[2][3] * m[3][0]
 					 + m[0][3] * m[2][0] * m[3][2]
 					 - m[0][3] * m[2][2] * m[3][0]
 					 - m[0][2] * m[2][0] * m[3][3]
 					 - m[0][0] * m[2][3] * m[3][2]) / determinant,/// 22
 
-					(- m[0][0] * m[1][2] * m[3][3]
+					(-m[0][0] * m[1][2] * m[3][3]
 					 - m[0][2] * m[1][3] * m[3][0]
 					 - m[0][3] * m[1][0] * m[3][2]
 					 + m[0][3] * m[1][2] * m[3][0]
 					 + m[0][2] * m[1][0] * m[3][3]
 					 + m[0][0] * m[1][3] * m[3][2]) / determinant,/// 23
 
-					(+ m[0][0] * m[1][2] * m[2][3]
+					(+m[0][0] * m[1][2] * m[2][3]
 					 + m[0][2] * m[1][3] * m[2][0]
 					 + m[0][3] * m[1][0] * m[2][2]
 					 - m[0][3] * m[1][2] * m[2][0]
 					 - m[0][2] * m[1][0] * m[2][3]
 					 - m[0][0] * m[1][3] * m[2][2]) / determinant,/// 24
 
-					(+ m[1][0] * m[2][1] * m[3][3]
+					(+m[1][0] * m[2][1] * m[3][3]
 					 + m[1][1] * m[2][3] * m[3][0]
 					 + m[1][3] * m[2][0] * m[3][1]
 					 - m[1][3] * m[2][1] * m[3][0]
 					 - m[1][1] * m[2][0] * m[3][3]
 					 - m[1][0] * m[2][3] * m[3][1]) / determinant,/// 31
 
-					(- m[0][0] * m[2][1] * m[3][3]
+					(-m[0][0] * m[2][1] * m[3][3]
 					 - m[0][1] * m[2][3] * m[3][0]
 					 - m[0][3] * m[2][0] * m[3][1]
 					 + m[0][3] * m[2][1] * m[3][0]
 					 + m[0][1] * m[2][0] * m[3][3]
 					 + m[0][0] * m[2][3] * m[3][1]) / determinant,/// 32
 
-					(+ m[0][0] * m[1][1] * m[3][3]
+					(+m[0][0] * m[1][1] * m[3][3]
 					 + m[0][1] * m[1][3] * m[3][0]
 					 + m[0][3] * m[1][0] * m[3][1]
 					 - m[0][3] * m[1][1] * m[3][0]
 					 - m[0][1] * m[1][0] * m[3][3]
 					 - m[0][0] * m[1][3] * m[3][1]) / determinant,/// 33
 
-					(- m[0][0] * m[1][1] * m[2][3]
+					(-m[0][0] * m[1][1] * m[2][3]
 					 - m[0][1] * m[1][3] * m[2][0]
 					 - m[0][3] * m[1][0] * m[2][1]
 					 + m[0][3] * m[1][1] * m[2][0]
 					 + m[0][1] * m[1][0] * m[2][3]
 					 + m[0][0] * m[1][3] * m[2][1]) / determinant,/// 34
 
-					(- m[1][0] * m[2][1] * m[3][2]
+					(-m[1][0] * m[2][1] * m[3][2]
 					 - m[1][1] * m[2][2] * m[3][0]
 					 - m[1][2] * m[2][0] * m[3][1]
 					 + m[1][2] * m[2][1] * m[3][0]
 					 + m[1][1] * m[2][0] * m[3][2]
 					 + m[1][0] * m[2][2] * m[3][1]) / determinant,/// 41
 
-					(+ m[0][0] * m[2][1] * m[3][2]
+					(+m[0][0] * m[2][1] * m[3][2]
 					 + m[0][1] * m[2][2] * m[3][0]
 					 + m[0][2] * m[2][0] * m[3][1]
 					 - m[0][2] * m[2][1] * m[3][0]
 					 - m[0][1] * m[2][0] * m[3][2]
 					 - m[0][0] * m[2][2] * m[3][1]) / determinant,/// 42
 
-					(- m[0][0] * m[1][1] * m[3][2]
+					(-m[0][0] * m[1][1] * m[3][2]
 					 - m[0][1] * m[1][2] * m[3][0]
 					 - m[0][2] * m[1][0] * m[3][1]
 					 + m[0][2] * m[1][1] * m[3][0]
 					 + m[0][1] * m[1][0] * m[3][2]
 					 + m[0][0] * m[1][2] * m[3][1]) / determinant,/// 43
 
-					(+ m[0][0] * m[1][1] * m[2][2]
+					(+m[0][0] * m[1][1] * m[2][2]
 					 + m[0][1] * m[1][2] * m[2][0]
 					 + m[0][2] * m[1][0] * m[2][1]
 					 - m[0][2] * m[1][1] * m[2][0]
@@ -488,8 +458,7 @@ Matrix4x4 Matrix4x4::Inverse() {
 	};
 }
 
-Matrix4x4 Matrix4x4::Transpose()
-{
+Matrix4x4 Matrix4x4::Transpose() {
 	Matrix4x4 result = {};
 	Matrix4x4 a = *this;
 	for (int i = 0; i < 4; i++) {
@@ -502,8 +471,7 @@ Matrix4x4 Matrix4x4::Transpose()
 	return result;
 }
 
-Matrix4x4 Matrix4x4::operator+(const Matrix4x4& target)
-{
+Matrix4x4 Matrix4x4::operator+(const Matrix4x4& target) {
 	Matrix4x4 resuit = {};
 	for (int x = 0; x < 4; x++) {
 		for (int y = 0; y < 4; y++) {
@@ -515,8 +483,7 @@ Matrix4x4 Matrix4x4::operator+(const Matrix4x4& target)
 	return resuit;
 }
 
-Matrix4x4 Matrix4x4::operator-(const Matrix4x4& target)
-{
+Matrix4x4 Matrix4x4::operator-(const Matrix4x4& target) {
 	Matrix4x4 resuit = {};
 	for (int x = 0; x < 4; x++) {
 		for (int y = 0; y < 4; y++) {
@@ -526,18 +493,7 @@ Matrix4x4 Matrix4x4::operator-(const Matrix4x4& target)
 	return resuit;
 }
 
-Matrix4x4 Matrix4x4::operator*(const Matrix4x4& target)
-{
-	//Matrix3x3 result = {};
-	//for (int i = 0; i < 3; i++) {
-	//	for (int j = 0; j < 3; j++) {
-	//		for (int k = 0; k < 3; k++) {
-	//			result.m[i][j] += m[i][k] * target.m[k][j];
-	//		}
-	//	}
-	//}
-	//return result;
-
+Matrix4x4 Matrix4x4::operator*(const Matrix4x4& target) {
 	Matrix4x4 resuit = {};
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -549,8 +505,7 @@ Matrix4x4 Matrix4x4::operator*(const Matrix4x4& target)
 	return resuit;
 }
 
-Matrix4x4 Matrix4x4::operator*(const float& target)
-{
+Matrix4x4 Matrix4x4::operator*(const float& target) {
 	Matrix4x4 resuit = {};
 	for (int x = 0; x < 4; x++) {
 		for (int y = 0; y < 4; y++) {
@@ -561,8 +516,7 @@ Matrix4x4 Matrix4x4::operator*(const float& target)
 }
 
 
-Matrix4x4 operator*(float scalar, const Matrix4x4& vec)
-{
+Matrix4x4 operator*(float scalar, const Matrix4x4& vec) {
 	Matrix4x4 resuit = {};
 	for (int x = 0; x < 4; x++) {
 		for (int y = 0; y < 4; y++) {
@@ -573,17 +527,15 @@ Matrix4x4 operator*(float scalar, const Matrix4x4& vec)
 }
 
 #pragma region 陣列転換
-Matrix4x4 MakeTranslateMatrix3x3(const Vector3 translate)
-{
-	return Matrix4x4{		 1.0f,		  0.0f,		   0.0f, 0.0f,
+Matrix4x4 MakeTranslateMatrix3x3(const Vector3 translate) {
+	return Matrix4x4{ 1.0f,		  0.0f,		   0.0f, 0.0f,
 							 0.0f,		  1.0f,		   0.0f, 0.0f,
 							 0.0f,		  0.0f,		   1.0f, 0.0f,
 					  translate.x, translate.y,	translate.z, 1.0f };
 }
 
-Vector3 MakeTranslateVector3(const Matrix4x4 translate)
-{
-	return Vector3(translate.m[3][0],translate.m[3][1],translate.m[3][2]);
+Vector3 MakeTranslateVector3(const Matrix4x4 translate) {
+	return Vector3(translate.m[3][0], translate.m[3][1], translate.m[3][2]);
 }
 #pragma endregion
 
@@ -822,16 +774,15 @@ void MatrixScreenPrintf(int x, int y, Matrix4x4& matrix, const char* name) {
 	}
 }
 
-Matrix4x4 MakeScaleMatrix(const Vector3 scole)
-{
+Matrix4x4 MakeScaleMatrix(const Vector3 scole) {
 	return Matrix4x4{ scole.x,    0.0f,    0.0f, 0.0f,
 						 0.0f, scole.y,    0.0f, 0.0f,
-					     0.0f,    0.0f, scole.z, 0.0f,
-					     0.0f,    0.0f,	   0.0f, 1.0f };
+						 0.0f,    0.0f, scole.z, 0.0f,
+						 0.0f,    0.0f,	   0.0f, 1.0f };
 }
 
 Matrix4x4 MakeRotateXMatrix(const float theta) {
-	Matrix4x4 rX = {		1.0f,		   0.0f,         0.0f, 0.0f,
+	Matrix4x4 rX = { 1.0f,		   0.0f,         0.0f, 0.0f,
 							0.0f,   cosf(theta),  sinf(theta), 0.0f,
 							0.0f,  -sinf(theta),  cosf(theta), 0.0f,
 							0.0f,	       0.0f,		 0.0f, 1.0f };
@@ -855,91 +806,197 @@ Matrix4x4 MakeRotateZMatrix(const float theta) {
 }
 
 Matrix4x4 MakeRotateMatrix(const Matrix4x4 thetaX, const Matrix4x4 thetaY, const Matrix4x4 thetaZ) {
-	return Multiply(thetaX, Multiply(thetaY,thetaZ));
+	return Multiply(thetaX, Multiply(thetaY, thetaZ));
 }
 
-
-
-Matrix4x4 MakeTranslateMatrix(const Vector3 translate)
-{
-	return Matrix4x4{		 1.0f,		  0.0f,		   0.0f, 0.0f,
+Matrix4x4 MakeTranslateMatrix(const Vector3 translate) {
+	return Matrix4x4{ 1.0f,		  0.0f,		   0.0f, 0.0f,
 							 0.0f,		  1.0f,		   0.0f, 0.0f,
 							 0.0f,		  0.0f,		   1.0f, 0.0f,
 					  translate.x, translate.y,	translate.z, 1.0f };
 }
 
-Matrix4x4 MakeAffineMatrix(Vector3 scole, Vector3 rotate, Vector3 translate)
-{
-	Matrix4x4 r1 = MakeScaleMatrix(scole);
+Matrix4x4 MakeAffineMatrix(Vector3 scale, Vector3 rotate, Vector3 translate) {
+	Matrix4x4 r1 = MakeScaleMatrix(scale);
 
 	Matrix4x4 r2 = MakeRotateMatrix(MakeRotateXMatrix(rotate.x),
-									MakeRotateYMatrix(rotate.y),
-									MakeRotateZMatrix(rotate.z));
+		MakeRotateYMatrix(rotate.y),
+		MakeRotateZMatrix(rotate.z));
 
 	Matrix4x4 r3 = MakeTranslateMatrix(translate);
 
+	//return Matrix4x4{ r3 * (r2 * r1) };
+	//return Matrix4x4{ r1 * r2 * r3 };
 	return Matrix4x4{ r1 * (r2 * r3) };
 }
 
 
-Matrix4x4 MatrixMix(Matrix4x4* matrix1, Matrix4x4* matrix2, Matrix4x4* matrix3, Matrix4x4* matrix4)
-{
-		 if (matrix4 == nullptr) { return Matrix4x4{ *matrix1 * *matrix2 * *matrix3 }; }
-	else if (matrix3 == nullptr) { return Matrix4x4{ *matrix1 * *matrix2 }; }
-	   else						 { return Matrix4x4{ *matrix1 * *matrix2 * *matrix3 * *matrix4 }; }
+Matrix4x4 MatrixMix(Matrix4x4* matrix1, Matrix4x4* matrix2, Matrix4x4* matrix3, Matrix4x4* matrix4) {
+	if (matrix4 == nullptr) { return Matrix4x4{ *matrix1 * *matrix2 * *matrix3 }; } else if (matrix3 == nullptr) { return Matrix4x4{ *matrix1 * *matrix2 }; } else { return Matrix4x4{ *matrix1 * *matrix2 * *matrix3 * *matrix4 }; }
 }
 
 /////////////////////////////////////////////////////////////////
 
-Matrix4x4 MakeWorldMatrix(Matrix4x4 origin)
-{
-		return origin;
+Matrix4x4 MakeWorldMatrix(Matrix4x4 origin) {
+	return origin;
 }
 
-Matrix4x4 MakeViewMatrix(Vector3 scole, Vector3 rotate, Vector3 translate)
-{
-	return MakeAffineMatrix( scole, rotate, translate);
+Matrix4x4 MakeViewMatrix(Vector3 scole, Vector3 rotate, Vector3 translate) {
+	return MakeAffineMatrix(scole, rotate, translate);
 }
 
-Matrix4x4 MakeProjectionMatrix(float leftO, float rightO, float topO, float bottomO, float nearO, float farO)
-{
+Matrix4x4 MakeProjectionMatrix(float leftO, float rightO, float topO, float bottomO, float nearO, float farO) {
 	return{ 2.0f / (rightO - leftO),0.0f,0.0f,0.0f,
 			0.0f,2.0f / (topO - bottomO),0.0f,0.0f,
 			0.0f,0.0f,1.0f / (farO - nearO),0.0f,
 			(leftO + rightO) / (leftO - rightO),(topO + bottomO) / (bottomO - topO),nearO / (nearO - farO),1.0f };
 }
 
-Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip)
-{
-	return { (1.0f / aspectRatio) * 1.0f / tanf( fovY / 2.0f),0.0f,0.0f,0.0f,
-			 0.0f,1.0f /tanf(fovY / 2.0f ),0.0f,0.0f,
-			 0.0f,0.0f,farClip / (farClip - nearClip),1.0f,
-			 0.0f,0.0f,-(nearClip * farClip) / (farClip - nearClip),0.0f };
+Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip) {
+	return { (1.0f / aspectRatio) * (1.0f / tanf(fovY / 2.0f)),					  0.0f,				 						   0.0f,0.0f,
+														 0.0f,1.0f / (tanf(fovY / 2.0f)),				 					   0.0f,0.0f,
+														 0.0f,					  0.0f,				 farClip / (farClip - nearClip),1.0f,
+														 0.0f,					  0.0f,-(nearClip * farClip) / (farClip - nearClip),0.0f };
 }
 
-Matrix4x4 MakeViewportMatrix(float left, float top, float width, float height, float maxD, float minD)
-{
-	return { width / 2.0f,0.0f,0.0f,0.0f,
-			 0.0f,-(height / 2.0f),0.0f,0.0f,
-			 0.0f,0.0f,maxD - minD,0.0f,
-			 left + (width / 2.0f),top + (height / 2.0f),minD,1.0f };
+Matrix4x4 MakeViewportMatrix(float left, float top, float width, float height, float minD, float maxD) {
+	return { width / 2.0f,     			   0.0f,       0.0f,0.0f,
+								 0.0f,     -(height / 2.0f),       0.0f,0.0f,
+								 0.0f,     		       0.0f,maxD - minD,0.0f,
+				left + (width / 2.0f),top + (height / 2.0f),       minD,1.0f };
 }
 
 Vector3 viewFinilTransform(Vector3 obj, Matrix4x4 tranformMatrix) {
-	return MakeTranslateVector3(MakeTranslateMatrix(obj) * tranformMatrix);
+	Matrix4x4 objMatrix = MakeTranslateMatrix(obj) * tranformMatrix;
+	if (objMatrix.m[3][3] != 0) {
+		objMatrix.m[3][0] /= objMatrix.m[3][3];
+		objMatrix.m[3][1] /= objMatrix.m[3][3];
+		objMatrix.m[3][2] /= objMatrix.m[3][3];
+		objMatrix.m[3][3] = 1.0f;
+	} else {
+		//assert(0);
+	}
+	return MakeTranslateVector3(objMatrix);
 }
-
 
 //////////////////////////////////////////////////////////////////////////陣列結合
 
 #pragma endregion
 
+#pragma region Geometry
+
+void DrawGrid(const Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMatrix) {
+	const float kGridHalfWidth = 2.0f;  // Gridの半分の幅
+	const int kSubdivision = 10;   // 分割数
+	const float kGridEvery = (kGridHalfWidth * 2.0f) / float(kSubdivision);  // 1つ分の長さ
+	// 奥から手前への線を順々に引いていく
+	for (int xIndex = 0; xIndex <= kSubdivision; ++xIndex) {
+		// 上の情報を使ってワールド座標系上の始点と終点を求める
+		Vector3 start = { -kGridHalfWidth + (kGridEvery * xIndex), 0.0f,  -kGridHalfWidth };
+		Vector3 end = { -kGridHalfWidth + (kGridEvery * xIndex), 0.0f,  kGridHalfWidth };
+		// スクリーン座標系まで変換をかける
+		Vector3 startV2 = viewFinilTransform(start, viewProjectionMatrix);
+		Vector3 endV2 = viewFinilTransform(end, viewProjectionMatrix);
+		Vector3 startV3 = viewFinilTransform(startV2, viewportMatrix);
+		Vector3 endV3 = viewFinilTransform(endV2, viewportMatrix);
+
+		// 変換した座標を使って表示。色は薄い灰色(0xAAAAAAFF)、原点は黒ぐらいが良いが、何でも良い
+		int color1 = 0xAAAAAAFF;
+		int color2 = 0x000000FF;
+		if (xIndex == 5) {
+			Novice::DrawLine((int)startV3.x, (int)startV3.y,
+				(int)endV3.x, (int)endV3.y,
+				color2);
+		} else {
+			Novice::DrawLine((int)startV3.x, (int)startV3.y,
+				(int)endV3.x, (int)endV3.y,
+				color1);
+		}
+	}
+	// 左から右も同じように順々に引いていく
+	for (int zIndex = 0; zIndex <= kSubdivision; ++zIndex) {
+		// 奥から手前が左右に変わるだけ
+
+		// 上の情報を使ってワールド座標系上の始点と終点を求める
+		Vector3 start = { -kGridHalfWidth , 0.0f, -kGridHalfWidth + kGridEvery * zIndex };
+		Vector3 end = { kGridHalfWidth , 0.0f, -kGridHalfWidth + kGridEvery * zIndex };
+
+		// スクリーン座標系まで変換をかける
+		Vector3 startV2 = viewFinilTransform(start, viewProjectionMatrix);
+		Vector3 endV2 = viewFinilTransform(end, viewProjectionMatrix);
+		Vector3 startV3 = viewFinilTransform(startV2, viewportMatrix);
+		Vector3 endV3 = viewFinilTransform(endV2, viewportMatrix);
+
+		// 変換した座標を使って表示。色は薄い灰色(0xAAAAAAFF)、原点は黒ぐらいが良いが、何でも良い
+		int color1 = 0xAAAAAAFF;
+		int color2 = 0x000000FF;
+		if (zIndex == 5) {
+			Novice::DrawLine((int)startV3.x, (int)startV3.y,
+				(int)endV3.x, (int)endV3.y,
+				color2);
+		} else {
+			Novice::DrawLine((int)startV3.x, (int)startV3.y,
+				(int)endV3.x, (int)endV3.y,
+				color1);
+		}
+	}
+}
+
+void DrawSphere(const Sphere& sphere, const Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMatrix, int color) {
+	const int kSubdivision = 24; // 分割数
+	const float kLonEvery = M_PI / kSubdivision; // 経度分割1つ分の角度
+	const float kLatEvery = 2.0f * M_PI / kSubdivision; // 緯度分割1つ分の角度
+	// 緯度方向に分割 -π/2 ～ π/2
+	for (int latIndex = 0; latIndex < kSubdivision; ++latIndex) {
+		float lat = -M_PI / 2.0f + kLatEvery * latIndex; // 現在の緯度
+		// 経度方向に分割 0 ～ 2π
+		for (int lonIndex = 0; lonIndex < kSubdivision; ++lonIndex) {
+			float lon = lonIndex * kLonEvery; // 現在の経度
+			// ワールド座標系でのa, b, cを計算
+			///Vector3 a, b, c;
+			Vector3 a = { sphere.center.x + sphere.radius * cosf(lat) * cosf(lon),
+						  sphere.center.y + sphere.radius * sinf(lat),
+						  sphere.center.z + sphere.radius * cosf(lat) * sinf(lon) };
+
+			Vector3 b = { sphere.center.x + sphere.radius * cosf(lat) * cosf(lon + kLonEvery),
+						  sphere.center.y + sphere.radius * sinf(lat),
+						  sphere.center.z + sphere.radius * cosf(lat) * sinf(lon + kLonEvery) };
+
+			Vector3 c = { sphere.center.x + sphere.radius * cosf(lat + kLatEvery) * cosf(lon),
+						  sphere.center.y + sphere.radius * sinf(lat + kLatEvery),
+						  sphere.center.z + sphere.radius * cosf(lat + kLatEvery) * sinf(lon) };
+
+			// a, b, cをスクリーン座標系に変換
+
+			Vector3 aV2 = viewFinilTransform(a, viewProjectionMatrix);
+			Vector3 bV2 = viewFinilTransform(b, viewProjectionMatrix);
+			Vector3 cV2 = viewFinilTransform(c, viewProjectionMatrix);
+			Vector3 aV3 = viewFinilTransform(aV2, viewportMatrix);
+			Vector3 bV3 = viewFinilTransform(bV2, viewportMatrix);
+			Vector3 cV3 = viewFinilTransform(cV2, viewportMatrix);
+
+			// abとbcの線分を描画
+			Novice::DrawLine((int)aV3.x, (int)aV3.y,
+				(int)bV3.x, (int)bV3.y, color);
+			Novice::DrawLine((int)aV3.x, (int)aV3.y,
+				(int)cV3.x, (int)cV3.y, color);
+		}
+	}
+}
+
+#pragma endregion
+
 #pragma region Other
-bool binaryComparator(int binary, int target) {
+bool BinaryComparator(int binary, int target) {
 	if (binary == (target & binary)) {
 		return true;
 	}
 	return false;
+}
+Vector3 Cross(const Vector3& v1, const Vector3& v2) {
+	return { (v1.y * v2.z) - (v1.z * v2.y),
+			 (v1.z * v2.x) - (v1.x * v2.z),
+			 (v1.x * v2.y) - (v1.y * v2.x) };
 }
 #pragma endregion
 

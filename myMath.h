@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <assert.h>
 #include <math.h>
+#define M_PI 3.14159265358979323846f
 
 ///by keno v1.35
 
@@ -320,7 +321,7 @@ Matrix4x4 MakeTranslateMatrix(const Vector3 translate);
 /// <param name="rotate">Vector3</param>
 /// <param name="translate">Vector3</param>
 /// <returns>結果Matrix4x4</returns>
-Matrix4x4 MakeAffineMatrix(Vector3 scole, Vector3 rotate, Vector3 translate);
+Matrix4x4 MakeAffineMatrix(Vector3 scale, Vector3 rotate, Vector3 translate);
 
 /// <summary>
 /// 最大4つのMatrix4x4を掛け算する
@@ -331,9 +332,9 @@ Matrix4x4 MakeAffineMatrix(Vector3 scole, Vector3 rotate, Vector3 translate);
 /// <param name="matrix4">Matrix4x4 その4(有無可)</param>
 /// <returns>結果Matrix3x3</returns>
 Matrix4x4 MatrixMix(Matrix4x4* matrix1,
-					Matrix4x4* matrix2, 
-					Matrix4x4* matrix3 = nullptr,
-					Matrix4x4* matrix4 = nullptr);
+	Matrix4x4* matrix2,
+	Matrix4x4* matrix3 = nullptr,
+	Matrix4x4* matrix4 = nullptr);
 
 /// <summary>
 /// ローカル座標からのワルド座標へ改変
@@ -351,24 +352,24 @@ Matrix4x4 MakeViewMatrix(Vector3 scole, Vector3 rotate, Vector3 translate);
 /// 正射影変換数列生成
 /// </summary>
 /// <returns>結果Matrix4x4</returns>
-Matrix4x4 MakeProjectionMatrix(float  leftO,float  rightO,
-							   float   topO,float bottomO,
-							   float  nearO,float    farO);
+Matrix4x4 MakeProjectionMatrix(float  leftO, float  rightO,
+	float   topO, float bottomO,
+	float  nearO, float    farO);
 
 /// <summary>
 /// 透視投影変換数列生成
 /// </summary>
 /// <returns>結果Matrix4x4</returns>
-Matrix4x4 MakePerspectiveFovMatrix(float fovY,float aspectRatio,
-								   float nearClip,float farClip);
+Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio,
+	float nearClip, float farClip);
 
 /// <summary>
 /// ビューポート変換数列生成
 /// </summary>
 /// <returns>結果Matrix4x4</returns>
-Matrix4x4 MakeViewportMatrix(float   left, float   top,
-							 float  width, float  height,
-							 float   maxD, float    minD);
+Matrix4x4 MakeViewportMatrix(float   left, float     top,
+	float  width, float  height,
+	float    minD, float    maxD);
 
 /// <summary>
 ///　3Dカメラの総まとめ変換
@@ -391,6 +392,26 @@ struct Transform {
 };
 #pragma endregion
 
+#pragma region Geometry
+
+#pragma region Grid
+
+void DrawGrid(const Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMatrix);
+
+#pragma endregion
+
+#pragma region Ball
+typedef struct Sphere {
+	Vector3 center;
+	float radius;
+}Sphere;
+
+void DrawSphere(const Sphere& sphere, const Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMatrix, int color);
+
+#pragma endregion
+
+#pragma endregion
+
 #pragma region Other
 
 /// <summary>
@@ -399,6 +420,15 @@ struct Transform {
 /// <param name="binary">比較基準</param>
 /// <param name="target">目標</param>
 /// <returns>=ならtrue</returns>
-bool binaryComparator(int binary, int target);
+bool BinaryComparator(int binary, int target);
+
+/// <summary>
+/// cross積を求める
+/// </summary>
+/// <param name="v1">線A</param>
+/// <param name="v2">線B</param>
+/// <returns></returns>
+Vector3 Cross(const Vector3& v1, const Vector3& v2);
+
 
 #pragma endregion
